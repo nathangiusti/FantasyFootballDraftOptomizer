@@ -8,6 +8,10 @@ Here we make some arbitrary decisions. I believe we should base our marginal val
 
 Let the lowest point total for a position (10th in the example above) as the base score. We subtract the base score from a players projected score to calculate how many additional points that player would score for us that season. This number is compareable across positions, allowing us to turn our 4 separate rankings into one weighted ranking.  
 
+Stat rankings from https://www.pro-football-reference.com/years/2018/fantasy.htm
+
+Player rankings from FantasyPros
+
 Inputs
 
 - A ranking of players by position (separate files for each position)
