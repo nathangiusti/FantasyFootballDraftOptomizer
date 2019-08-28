@@ -44,14 +44,14 @@ def load_position_rankings(config):
             next(csv_reader)
             for row in csv_reader:
                 if row[0]:
-                    name_rank_map[row[2]] = row[0]
+                    name_rank_map[row[3]] = row[0]
     return name_rank_map
 
 
 def calculate_player_values(player_list, position):
     player_list.sort(key=player_sort_score, reverse=True)
     point_spread = player_list[0].score - player_list[position_list[position]].score
-    differential = point_spread / player_list[position_list[position]].score
+    differential = point_spread / position_list[position]
     for player in player_list:
         player.value = point_spread - (int(player.rank) * differential)
 
@@ -75,6 +75,7 @@ with open(config_file['stat_file']) as csv_file:
         interception = float(row[11]) if row[11] else 0
         rushing_yard = float(row[13]) if row[13] else 0
         rushing_touchdown = float(row[15]) if row[15] else 0
+        receptions = float(row[17]) if row[17] else 0
         receiving_yard = float(row[18]) if row[18] else 0
         return_touchdown = float(row[21]) if row[21] else 0
         fumble_lost = float(row[22]) if row[22] else 0
@@ -88,16 +89,17 @@ with open(config_file['stat_file']) as csv_file:
             + receiving_yard * config_file['scoring']['receiving_yard'] \
             + return_touchdown * config_file['scoring']['return_touchdown'] \
             + fumble_lost * config_file['scoring']['fumble_lost'] \
-            + two_point_conversion * config_file['scoring']['two_point_conversion']
+            + two_point_conversion * config_file['scoring']['two_point_conversion'] \
+            + receptions * config_file['scoring']['ppr']
         if row[1] in name_rank:
             if row[3] == 'QB':
                 qb_list.append(Player(row[1], row[3], name_rank[row[1]], score))
             elif row[3] == 'RB':
-                rb_list.append(Player(row[1], row[3] ,name_rank[row[1]], score))
+                rb_list.append(Player(row[1], row[3], name_rank[row[1]], score))
             elif row[3] == 'WR':
                 wr_list.append(Player(row[1], row[3], name_rank[row[1]], score))
             elif row[3] == 'TE':
-                te_list.append(Player(row[1], row[3] ,name_rank[row[1]], score))
+                te_list.append(Player(row[1], row[3], name_rank[row[1]], score))
 
 position_list = {'QB': 0, 'WR': 0, 'TE': 0, 'RB': 0}
 
@@ -109,7 +111,7 @@ for position in config_file['positions']:
         position_list[position] = position_list[position] + 1
 
 for position in position_list:
-    position_list[position] = int(position_list[position] * 10)
+    position_list[position] = int(position_list[position] * config_file['league_size'])
 
 calculate_player_values(qb_list, 'QB')
 calculate_player_values(wr_list, 'WR')
@@ -120,7 +122,7 @@ calculate_player_values(te_list, 'TE')
 final_results = combine_rankings([qb_list, wr_list, rb_list, te_list])
 
 for player in final_results:
-    print('{},{},{}'.format(player.name, player.position, player.value))
+    print('{},{},{}'.format(player.name, player.position, int(player.value * 10)/10))
 
 
 

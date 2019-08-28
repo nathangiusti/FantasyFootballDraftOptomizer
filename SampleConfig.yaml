@@ -1,7 +1,7 @@
 # Position Settings
 # Since TE's are rarely used for flex spots, I would advise not adding it to the flex position
 
-league_size: 10
+league_size: 12
 
 positions:
   - QB
@@ -16,19 +16,20 @@ positions:
 scoring:
   passing_yard: .04 # 25 yards per point
   passing_touchdown: 4
-  interception: -2
+  interception: -1
   rushing_yard: .1
   rushing_touchdown: 6
   receiving_yard: .1
   return_touchdown: 6
   two_point_conversion: 2
   fumble_lost: -2
+  ppr: .5
 
 #Postion to name of file
 rankings:
-  QB: "FantasyPros_2018_Draft_QB_Rankings.csv"
-  RB: "FantasyPros_2018_Draft_RB_Rankings.csv"
-  WR: "FantasyPros_2018_Draft_WR_Rankings.csv"
-  TE: "FantasyPros_2018_Draft_TE_Rankings.csv"
+  QB: "FantasyPros_2019_Draft_QB_Rankings.csv"
+  RB: "FantasyPros_2019_Draft_RB_Rankings.csv"
+  WR: "FantasyPros_2019_Draft_WR_Rankings.csv"
+  TE: "FantasyPros_2019_Draft_TE_Rankings.csv"
 
 stat_file: Stat_file.csv
