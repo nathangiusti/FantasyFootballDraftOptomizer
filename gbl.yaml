@@ -14,16 +14,16 @@ positions:
 
 # All values points per
 scoring:
-  passing_yard: .04 # 25 yards per point
-  passing_touchdown: 4
-  interception: -1
+  passing_yard: .033 # 25 yards per point
+  passing_touchdown: 6
+  interception: -2
   rushing_yard: .1
   rushing_touchdown: 6
   receiving_yard: .1
   return_touchdown: 6
   two_point_conversion: 2
   fumble_lost: -2
-  ppr: .5
+  ppr: 0
 
 #Postion to name of file
 rankings:

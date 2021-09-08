@@ -2,6 +2,7 @@ import yaml
 import csv
 from enum import Enum
 
+YAML_FILE = 'gbl.yaml'
 
 class Position(Enum):
     QB = "QB"
@@ -43,7 +44,7 @@ def load_position_rankings(config):
             next(csv_reader)
             for row in csv_reader:
                 if row[0]:
-                    name_rank_map[pos].append(Player(row[3], pos, row[0]))
+                    name_rank_map[pos].append(Player(row[2], pos, row[0]))
     return name_rank_map
 
 
